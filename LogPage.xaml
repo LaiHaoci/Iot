@@ -1,0 +1,68 @@
+﻿<Window x:Class="IotDeviceManager.LogPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Activity Logs"
+        Height="500"
+        Width="700"
+        WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#FFAF4C5E"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="MinWidth" Value="100"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="15" Padding="10,5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FF458DA0"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Title -->
+                <RowDefinition Height="*"/>
+                <!-- Log List -->
+                <RowDefinition Height="Auto"/>
+                <!-- Buttons -->
+            </Grid.RowDefinitions>
+
+            <!-- Title -->
+            <TextBlock Text="Activity Logs"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10"/>
+
+            <!-- Log List -->
+            <Border Grid.Row="1" BorderBrush="#DDDDDD" BorderThickness="1" CornerRadius="10" Background="White">
+                <ListBox ItemsSource="{Binding Logs}"
+                         FontSize="14"
+                         BorderThickness="0"
+                         Padding="10"/>
+            </Border>
+
+            <!-- Buttons -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                <Button Content="Back" Width="100" Click="Back_Click" Margin="5" Style="{StaticResource RoundedButtonStyle}"/>
+                <Button Content="Export Logs" Command="{Binding ExportLogCommand}" Width="120" Margin="5" Style="{StaticResource RoundedButtonStyle}"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>
